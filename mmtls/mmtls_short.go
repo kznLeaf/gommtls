@@ -12,7 +12,6 @@ import (
 	"fmt"
 	"hash"
 	"io"
-	"io/ioutil"
 	"net"
 	"net/http"
 	"net/http/httputil"
@@ -230,7 +229,7 @@ func (c *MMTLSClientShort) parseResponse(conn net.Conn) ([]byte, error) {
 	b := new(bytes.Buffer)
 	io.Copy(b, resp.Body)
 	resp.Body.Close()
-	resp.Body = ioutil.NopCloser(b)
+	resp.Body = io.NopCloser(b)
 
 	return b.Bytes(), nil
 }
